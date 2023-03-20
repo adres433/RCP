@@ -1,0 +1,234 @@
+			body
+			{
+				width: 800px;
+				height: 630px;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 25px;
+				border-left: 1px solid #8b8b8b;
+				border-right: 1px solid #8b8b8b;
+				z-index:0;
+			}
+			#naglowek
+			{
+				/*background: gray;*/
+				width: 800px;
+				height: 60px;
+				padding-top: 10px;
+				border-bottom: 2px solid #8b8b8b;
+			}
+			#center
+			{
+				/*background: gray;*/
+				width: 800px;
+				height: 420px;	
+				text-align: center;
+			}
+			#bottom
+			{
+				/*background: silver;*/
+				width: 800px;
+				height: 100px;	
+				padding-top: 15px;
+			}
+			#foother
+			{
+				/*background: pink;*/
+				width: 800px;
+				height: 25px;	
+				font-size: 10px;
+				font-style: italic;
+				padding-top: 5px;
+			}
+			#logo
+			{
+				width: 210px;
+				height: 50px;
+				background: url('plastwil.gif');
+				float: left;
+			}
+			#tytul
+			{
+				float: left;
+				width: 440px;
+				height: 55px;
+				font-size: 35px
+			}
+			#czas
+			{
+				float: right;
+				width: 150px;
+				height: 10px;
+			}
+			#nazwisko, #operacja, #operacjaPlan
+			{
+				float: left;
+				width: 600px;
+				height: 100px;
+			}
+			#nazwisko
+			{
+				border-bottom: 2px solid #8b8b8b;
+				font-size: 45px;
+			}
+			#operacja td
+			{
+				font-size: 16px !important;
+				text-align: left;
+			}
+			.zdjecie
+			{
+				float: right;
+				width: 200px;
+				height: 300px;
+				/*border-left: 2px solid #8b8b8b;*/
+				background: url('rfid.png') no-repeat center;
+				background-size: 200px 300px !important;
+				overflow-y: auto;
+			}
+			div
+			{
+				text-align: center;
+				border: 0px solid black;
+			}
+			.przycisk
+			{
+				width:100px;
+				height: 40px;
+			}
+			#operacja input
+			{
+				width: 400px;
+				height: 30px;
+				border-bottom: 1px solid #8b8b8b;
+			}
+			#imie_nazwisko
+			{
+				width: 600px;
+				height: 100px;
+				font-size: 60px;
+				text-align: center;
+				border: 0px;
+				color: #6c6c6c;
+				
+			}
+			input, select
+			{
+				background: none;
+				border-color: #ffffff;
+				border: none;
+			}
+			#plan, #brygada
+			{
+				width: 400px;
+				height: 30px;
+				border-bottom-color: #8b8b8b;
+			}
+			.invalid
+			{
+				border-bottom: 2px dashed red !important;
+			}
+			.valid
+			{
+				border-bottom: 2px dashed green !important;
+			}
+			#przyciemnij
+			{
+				background: #8b8b8b;
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top:0px;
+				left: 0px;
+				margin: 0;
+				opacity: 0.3;
+				z-index:2;
+				display: none;
+			}
+			.komunikaty
+			{
+				position: fixed;
+				border: 1px solid #8b8b8b;
+				background: white;
+				width: 450px;
+				height: 220px;
+				z-index: 3;
+				display: none;
+				overflow-y: auto;
+			}
+			#komunikat1
+			{
+				background: url('loader.gif') no-repeat center white;
+				height: 285px;
+			}
+			#lista
+			{
+				width: 400px;
+				height: 110px;
+				border: none;
+				border-bottom: 1px solid #8b8b8b;
+				background: none;
+			}
+			#save, #cancel
+			{
+				display: none;
+			}
+			#log
+			{
+				width: 590px;
+				height: 90px;
+				border: none;
+				background-color: white;
+				resize: none;
+				border-bottom: 1px solid #8b8b8b;
+			}
+
+			.naglowekTable
+			{
+				font-size: 25px;
+			}
+			#presentTable
+			{
+				width: 450px;
+				height: 180px;
+			}
+			#presentTable th, #presentTable td, #presentTable
+			{
+				border-bottom: 1px solid #8b8b8b;
+				text-align: center;
+				border-collapse: collapse;
+				height: 30px;
+			}
+			#operacjaPlan
+			{
+				padding-top: 45px;
+			}
+			#operacjaPlan select
+			{
+				width: 580px;
+				height: 150px;
+				overflow-y: auto;
+			}
+			.komunikaty input
+			{			
+				height: 20px;
+				width: 370px;
+				border-bottom: 1px solid #8b8b8b
+			}
+			#planPola
+			{
+				text-align: center;
+			}
+			#wyborPlanu
+			{
+				outline: none;
+			}
+			input[type='date']
+			{
+				width: 145px;
+			}
+			#sprawnosc
+			{
+				width: 20px !important;
+				height: 20px !important;
+			}
