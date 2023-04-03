@@ -2,7 +2,7 @@
 
 ### Table of content
 
-- [Description EN](/#DESCRIPTION-EN)
+- [Description EN](#description-pl)
 - [Technologies](/#TECHNOLOGIES)
 - [How start](/#HOW-START)
 - [Description PL](/#DESCRIPTION-PL)
