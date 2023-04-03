@@ -402,7 +402,7 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 		{
 					$sql .= "`".++$i."_brygada` int(11) NOT NULL,";
 		}
-		$sql .= " `poczatek` date NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=0 ;";		
+		$sql .= " `poczatek` date NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=0;";		
 		@$result = mysql_query($sql, $connect) or die("Błąd zapisu do BD - proszę o kontakt z informatykiem.</br></br>".mysql_error());
 
 		$sql = "SET @d = (SELECT MAX(`id`)+1 FROM `plany`);";
@@ -720,6 +720,7 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 		if(isset($_POST['id']))
 			$headerID = $_POST['id'];
 		
+
 		$html = "<!DOCTYPE html><html>
 				<head> 
 				<meta charset=\"UTF-8\">
@@ -789,7 +790,7 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 		});
 		</script>";
 		if(isset($_GET['pdf']) || (isset($_GET['where']) && $_GET['where'] == 'many'))
-			$html .= "</head>";
+			$html .= "</head><body>";
 		include 'connecting.php';
 		$resLoop = '';
 		if(isset($_GET['where']) && $_GET['where'] == 'many')		
@@ -837,9 +838,14 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 			
 			if(!isset($_GET['pdf']) || (isset($_GET['where']) && $_GET['where'] == 'one'))
 			{	
-				$html .=  "<title>Raport pracownika: ".$wiersz['nazwisko']."</title></head>";	
+				$html .=  "</&nnnnnn&;><title>Raport pracownika: ".$wiersz['nazwisko']."</title></head>";	
 			}	
 				$html .=  "\n\n<style>th, td {padding: 5px 4px 5px 4px;}</style>\n";
+			
+			if(!isset($_GET['pdf']) || (isset($_GET['where']) && $_GET['where'] == 'one'))
+			{	
+				$html .=  "<body>";	
+			}	
 				$html .=  "<center>\n";
 			$html .=  "\t<table style='page-break-after: always'>\n";
 				$html .=  "\t\t<tr>\n";
@@ -1159,20 +1165,26 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 						else
 							$html .=  "\t\t\t\t\t\t<td width='80px' bgcolor='".$color."'>".$wiersz['data']."</td>\n";
 						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='dni'>".$tydzien[$wiersz['dzien']]."</td>\n";
-						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='wejscia' onclick=\"zmienPlan(".$idWpisu.", '".$wiersz['data']."')\">".$zmianaWejscie."</td>\n";
+						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='wejscia' ";
+						if(!isset($_GET['pdf']))
+							$html .= "onclick=\"zmienPlan(".$idWpisu.", '".$wiersz['data']."')\"";
+						$html .= ">".$zmianaWejscie."</td>\n";
 /*CZERWONY - spóźnienie*/			
 						if(strtotime($zmianaWejscie.":00") < strtotime(substr($pierwszeWE, -8)) && $pierwszeWE != 0 && $zmianaWyjscie != $zmianaWejscie)
 							$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: #DB8A8A;' class='przyjscia'>".$pierwszeWE."</td>\n";
 						else
 							$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='przyjscia'>".$pierwszeWE."</td>\n";
-						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='wyjscia' onclick=\"zmienPlan(".$idWpisu.", '".$wiersz['data']."')\">".$zmianaWyjscie."</td>\n";	
+						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='wyjscia' ";
+						if(!isset($_GET['pdf']))
+							$html .= "onclick=\"zmienPlan(".$idWpisu.", '".$wiersz['data']."')\"";
+						$html .= ">".$zmianaWyjscie."</td>\n";	
 /*CZERWONY - wczesne wyjscie*/									
 						if(strtotime($zmianaWyjscie.":00") > strtotime(substr($ostatnieWY, -8)) && $ostatnieWY != 0 && $zmianaWyjscie != $zmianaWejscie && !($pierwszeWE > $ostatnieWY && $zmianaWejscie > $zmianaWyjscie)) 
 							$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: #DB8A8A;' class='wyjsciowy'>".$ostatnieWY."</td>\n";
 						else
 							$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='wyjsciowy'>".$ostatnieWY."</td>\n";
-						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";'  class='zmiany'>".$czasZmiany."</td>\n";
-						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";'  class='zmiany'>".$gg.":".$mm."</td>\n";
+						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='zmiany'>".$czasZmiany."</td>\n";
+						$html .=  "\t\t\t\t\t\t<td style='border-left: 1px solid ".$kolor."; background: ".$color.";' class='zmiany'>".$gg.":".$mm."</td>\n";
 						
 						$tCzasZm =  (int)$gg;
 						
@@ -1182,14 +1194,17 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 							if(strcmp($ostatnieWY, "W PRACY") == 0)	//jeżeli nadal pracuje
 							{
 								//echo "PRACUJE";
-								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";'  class='zmiany'>$gg:00</td>\n";
+								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' class='zmiany'>$gg:00</td>\n";
 							}
 							else if(count($sqlb) == 2 && !is_null($sqlb['zaliczone']))	//jeżeli jest wpis zaliczonego czasu i nie jest pusty
 							{
 								$a = '';
 								//echo "NIE PUSTY";
 								($sqlb['zaliczone'] < 10)?$a='0'.$sqlb['zaliczone']:$a=$sqlb['zaliczone'];
-								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' id='id[".$sqlb['id']."]'  class='zmiany'onclick='up(".$sqlb['id'].")'>".$a.":00</td>\n";
+								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' id='id[".$sqlb['id']."]' class='zmiany'";
+								if(!isset($_GET['pdf']))
+									$html .= "onclick='up(".$sqlb['id'].")'";
+								$html .= ">".$a.":00</td>\n";
 								$sumaZaliczona += $sqlb['zaliczone'];
 							}
 							else if(count($sqlb) == 2 && empty($sqlb['zaliczone']))	//jeżeli wpis zaliczonego czasu jest pusty
@@ -1212,7 +1227,10 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 									$sqlc = mysql_query($sqlc, $connect) or die("Błąd odczytu z BD - proszę o kontakt z informatykiem.</br></br>".mysql_error());
 									$zaliczoneTemp = $gg;
 								}
-								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' id='id[".$sqlb['id']."]'  class='zmiany' onclick='up(".$sqlb['id'].")'>".$zaliczoneTemp.":00</td>\n";
+								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' id='id[".$sqlb['id']."]' class='zmiany'";
+								if (!isset($_GET['pdf']))
+									$html .= "onclick='up(".$sqlb['id'].")'";
+								$html .= ">".$zaliczoneTemp.":00</td>\n";
 								$sumaZaliczona += $zaliczoneTemp;
 							}
 						}
@@ -1222,14 +1240,17 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 							if(is_null($sqlb['zaliczone']))
 							{
 								//echo "BRAK ZALICZONYCH";
-								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' class='xxx_zaliczone' in-info='".$zmianaTemp[0]."' out-info='".$zmianaTemp[1]."'  class='zmiany'>00:00</td>\n";
+								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' class='xxx_zaliczone' in-info='".$zmianaTemp[0]."' out-info='".$zmianaTemp[1]."' class='zmiany'>00:00</td>\n";
 							}
 							else if(!is_null($sqlb['zaliczone']))
 							{
 								$a='';
 								//echo "ZALICZONE";
 								($sqlb['zaliczone'] < 10)?$a='0'.$sqlb['zaliczone']:$a=$sqlb['zaliczone'];
-								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' id='id[".$sqlb['id']."]'  class='zmiany'onclick='up(".$sqlb['id'].")'>".$a.":00</td>\n";
+								$html .=  "\t\t\t\t\t\t<td style='".$borderR." border-left: 1px solid ".$kolor."; background: ".$color.";' id='id[".$sqlb['id']."]' class='zmiany'";
+								if (!isset($_GET['pdf']))
+									$html .= "onclick='up(".$sqlb['id'].")'";
+								$html .= ">".$a.":00</td>\n";
 								$sumaZaliczona += $sqlb['zaliczone'];
 							}
 						}
@@ -1393,7 +1414,7 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 		}
 		
 		
-		$html .= "</html>";
+		$html .= "</body></html>";
 		
 		if(isset($_GET['pdf']))
 		{
@@ -1404,7 +1425,7 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 			$html = str_replace('Rozpoczęcie<br/>zmiany', 'Początek<br/>zmiany', $html);
 			$html = str_replace('<td></td>', '<td>&nbsp;</td>', $html);
 			$html = str_replace('<tr></tr>', '<tr><td>&nbsp;</td></tr>', $html);
-			$html = str_replace('<td style="background: #e9e9e9;">', '<td bgcolor="#e9e9e9">', $html);				// kolumna data ->data
+			$html = str_replace('<td style=\'background: #e9e9e9;\'>', '<td bgcolor=\'#e9e9e9\'>', $html);				// kolumna data ->data
 			$html = str_replace('background: #e9e9e9;\'', '\' bgcolor="#e9e9e9"', $html);
 			$html = str_replace('background: #ffffff;\'', '\' bgcolor="#ffffff"', $html);
 			$html = str_replace('background: #DB8A8A;\'', '\' bgcolor="#DB8A8A"', $html);
@@ -1419,8 +1440,22 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 			$html = str_replace('class="odejscia\'', 'width="90px"', $html);
 			$html = str_replace('\'', '"', $html);
 			
-			//echo "<textarea>".$html."</textarea>";		
-			print_pdf($html, $tytul);
+			//echo $html;
+			//echo "<textarea>".$html."</textarea>";
+			$htmlTemp = explode("</&nnnnnn&;>", $html);
+			if(count($htmlTemp) > 1)
+			{
+				foreach($htmlTemp as $index => $dataHtml)
+				{
+					
+					echo "<textarea>".$html."</textarea>";
+					//print_pdf($dataHtml, $tytul."_".$index, True);
+				}
+			}
+			else
+			{
+				print_pdf($html, $tytul, False);
+			}
 		}
 		else 
 			echo $html;
@@ -1675,10 +1710,14 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 		echo "OK";
 	}
 
-	function print_pdf($daneHTML, $title)
+	function print_pdf($daneHTML, $title, $zip)
 	{
 		include 'connecting.php';
 		require_once('TCPDF/config/tcpdf_config.php');
+		
+		$original_mem = ini_get('memory_limit');
+		// zmiana limitu pamięci aby generować większe zestawienia
+		ini_set('memory_limit','640M');				
 
 		// Include the main TCPDF library (search the library on the following directories).
 		$tcpdf_include_dirs = array(
@@ -1720,9 +1759,16 @@ $dniTygodnia = array('Monday' => 'poniedziałek', 'Tuesday' => 'wtorek', 'Wednes
 		//$pdf->Write(0, $daneHTML, '', 0, '', true, 0, false, false, 0);
 		$pdf->writeHTML($daneHTML, true, false, true, false, '');
 		ob_end_clean();
-		//ob_clean();		
+		//ob_clean();	
+		
+		if($zip)
+		{
+			$pdf->Output('/pdf/'.$title.'.pdf', 'F');
+		}
 		$pdf->Output('/document.pdf', 'I');
 		$pdf->Close();
+		ini_set('memory_limit',$original_mem);	
+			
 		return;
 	}
 ?>

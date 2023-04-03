@@ -1,0 +1,3 @@
+adres433
+LAPTOP-ADRES433 
+œroda, 6 marca 2019  18:54:58
