@@ -4,13 +4,13 @@ Rejestracja Czasu Pracy
 
 ### System elektronicznej rejestracji czasu pracy ###
 
-#Table of content
-*[Description EN](#DECRIPTION-EN)
-*[Technologies](#TECHNOLOGIES)
-*[How start](#HOW-START)
-*[Description PL](#DECRIPTION-PL)
+##Table of content##
+*[Description EN](#DECRIPTION-EN)*
+*[Technologies](#TECHNOLOGIES)*
+*[How start](#HOW-START)*
+*[Description PL](#DECRIPTION-PL)*
 
-#DECRIPTION EN
+##DECRIPTION EN##
 
 Work time register system cooperates with RFID readers, which be place near entrances to factory.
 
@@ -24,7 +24,7 @@ Security man get infromation about scanned worker, that as:
 - Current shift
 - Acces granted or not
 
-[!Security screen](./doc/PORTIERNIA.png)
+[[Security screen](./doc/PORTIERNIA.png)]
 
 Addition security man can display list all workers currently into factory - this function is very important ex. during evacuations.
 Lists show: absent workers, present workers and mark all workers in overtime - all according schedudle.
@@ -55,12 +55,12 @@ Interface for HR:
 - Reports can be generate to browser, pdf file or excel file.
 
 
-[!HR screen](./doc/HR.png)
+[[HR screen](./doc/HR.png)]
 
 
-[!Report screen](./doc/RAPORT.png)
+[[Report screen](./doc/RAPORT.png)]
 
-#TECHNOLOGIES
+#TECHNOLOGIES##
  - PHP 5.4.17
  - ARDUINO + ESP32
  - 3D PRINT - AUTOCAD
@@ -70,7 +70,7 @@ Interface for HR:
  - HTML, CSS
  - TCPDF
 
-#HOW START
+#HOW START##
 
 - Install web server with PHP >= 5.4.17 ex. [USBWebserver](https://www.usbwebserver.net/webserver/)
 - In [phpmyadmin](http://localhost/phpmyadmin) you import rcp.sql to database
@@ -80,7 +80,7 @@ Interface for HR:
 - If you would like, you can add new happend to registry by [try.php](http://localhost/try.php) 
 - You have to write card no in first field (ex. "147:40:93:26") and comment in second field (ex. "Manual out")
 
-#DESCRIPTION PL
+#DESCRIPTION PL##
 
 System rejestracjii czasu opiera sie na czytnikach odczytach z czytników
 RFID umieszczonych przy wejściach do zakładu.
@@ -97,7 +97,7 @@ Portier otrzymuje informację na temat wchodzacego i wychodzącego pracownika ta
 - Aktualny dostęp
 
 
-[!Security screen](./doc/PORTIERNIA.png)
+[[Security screen](./doc/PORTIERNIA.png)]
 
 Dodatkowo portier ma możliwość wyświetlenia listy wszystkich osób będących aktualnie w zakładzie
 oraz osób przebywających w zakładzie poza swoją zmianą - nadgodziny i osób nieobecnych - wg. harmonogramu.
@@ -121,10 +121,10 @@ Część interfejsu przeznaczona dla działu HR:
 - Raporty można generować do przeglądarki, pliku pdf oraz xls.
 
 
-[!HR screen](./doc/HR.png)
+[[HR screen](./doc/HR.png)]
 
 
-[!Report screen](./doc/RAPORT.png)
+[[Report screen](./doc/RAPORT.png)]
 
 
 
