@@ -3,9 +3,9 @@
 ### Table of content
 
 - [Description EN](#description-pl)
-- [Technologies](/#TECHNOLOGIES)
-- [How start](/#HOW-START)
-- [Description PL](/#DESCRIPTION-PL)
+- [Technologies](#technologies)
+- [How start](#how-start)
+- [Description PL](#description-pl)
 
 ### DESCRIPTION EN
 
